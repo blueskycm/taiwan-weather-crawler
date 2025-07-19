@@ -25,9 +25,9 @@ jobs:
         pip install gspread oauth2client requests beautifulsoup4 pandas
         pip install selenium
 
-    - name: 建立憑證JSON檔
+    - name: 建立憑證JSON檔（base64 解碼）
       run: |
-        echo "${{ secrets.GCP_CREDENTIALS_JSON }}" > service_account.json
+        echo "${{ secrets.GCP_CREDENTIALS_JSON }}" | base64 -d > service_account.json
 
     - name: 執行主程式
       run: python main.py
