@@ -9,6 +9,8 @@ on:
 jobs:
   run-weather-script:
     runs-on: ubuntu-latest
+    env:
+      SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
 
     steps:
     - name: 下載程式碼

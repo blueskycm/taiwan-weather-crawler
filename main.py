@@ -1,4 +1,5 @@
 import time
+from datetime import datetime, timedelta, timezone
 import re
 import os
 import pandas as pd
@@ -10,7 +11,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 
 # ✅ Google Sheets 設定
-SPREADSHEET_ID = "1emtFYywTbVBlUVOz3DBkzDUTBotRNTMsXkGXD52iPbk"
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 SERVICE_ACCOUNT_FILE = "service_account.json"
 SHEET_NAME = "weather_data"
 
@@ -22,6 +23,10 @@ CITY_CID_MAP = {
     "屏東縣": "10013", "宜蘭縣": "10002", "花蓮縣": "10015", "臺東縣": "10014", "澎湖縣": "10016",
     "金門縣": "09020", "連江縣": "09007"
 }
+
+# ✅ 台灣時區設定
+TAIWAN_TZ = timezone(timedelta(hours=8))
+now = datetime.now(TAIWAN_TZ)
 
 # ✅ 擷取單一縣市的天氣資料
 def get_city_weather(city, cid):
@@ -46,7 +51,7 @@ def get_city_weather(city, cid):
             if not match:
                 raise ValueError("格式不符")
             month, day = map(int, match.groups())
-            date_obj = datetime(datetime.now().year, month, day)
+            date_obj = datetime(now.year, month, day, tzinfo=TAIWAN_TZ)
             dates.append(date_obj.strftime("%Y-%m-%d"))
         except Exception as e:
             print(f"❌ 日期解析失敗: {d} -> {e}")
@@ -88,7 +93,7 @@ def get_city_weather(city, cid):
     day_data = extract_temp_weather(day_row.find_all("td")) if day_row else []
     night_data = extract_temp_weather(night_row.find_all("td")) if night_row else []
 
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
     rows = []
     for i in range(7):
         rows.append({
