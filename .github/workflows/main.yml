@@ -24,9 +24,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install gspread oauth2client requests beautifulsoup4 pandas
 
-    - name: 建立憑證檔案
+    - name: 建立憑證JSON檔
       run: |
-        echo "${{ secrets.GS_CREDENTIALS }}" > trn3-466407-aee04859332a.json
+        echo "${{ secrets.GCP_CREDENTIALS_JSON }}" > service_account.json
 
     - name: 執行主程式
       run: python main.py
