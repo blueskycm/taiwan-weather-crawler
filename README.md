@@ -54,7 +54,7 @@ graph TD
 ## 📌 請勿將 service_account.json 上傳至 GitHub！實際部署中使用 GitHub Secrets 保護金鑰。
 
 ## 📂 專案結構
-   ```mermaid
+```plaintext
 .
 ├── .github/workflows/
 │   └── weather.yml        # GitHub Actions 設定（每日兩次執行）
