@@ -12,3 +12,7 @@ __pycache__/
 
 # 忽略個人化設定
 .idea/
+
+# 忽略 Changelog 紀錄檔
+CHANGELOG.md
+changelog.md
