@@ -2,8 +2,8 @@ name: 每日兩次抓取氣象資料
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # 台灣早上 6 點
-    - cron: '0 10 * * *'  # 台灣下午 6 點
+    - cron: '17 22 * * *'  # 台灣時間 06:17（UTC+8）
+    - cron: '17 10 * * *'  # 台灣時間 18:17（UTC+8）
   workflow_dispatch:
 
 jobs:
