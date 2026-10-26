@@ -17,6 +17,13 @@
 - 🔒 **使用 GitHub Secrets 管理金鑰**：避免任何敏感資訊洩漏
 
 ---
+## 排程維護
+
+- 預設分支為 `main`，排程為 UTC `17 10,22 * * *`，即台灣時間每日 06:17、18:17。
+- 2026-10-27：重新寫入合併排程設定，Actions 升級至 `actions/checkout@v7`、`actions/setup-python@v7`（Node.js 24），固定 `ubuntu-24.04`，避免 `ubuntu-latest` 自動切換系統版本。
+- Actions 排程仍可能延遲；workflow 顯示啟用不代表已準時觸發，需在執行紀錄確認事件為 `schedule`。
+
+---
 ## 🛠️ 使用技術
 - Python 3.12
 - [Selenium](https://pypi.org/project/selenium/) + Chrome Headless
@@ -29,7 +36,7 @@
 ```plaintext
 .
 ├── .github/workflows/
-│   └── weather.yml        # GitHub Actions 設定（每日兩次執行）
+│   └── main.yml           # GitHub Actions 設定（每日兩次執行）
 ├── main.py                # 主程式：抓取資料並寫入 Sheets
 ├── requirements.txt       # Python 相依套件清單
 └── README.md              # 專案說明文件

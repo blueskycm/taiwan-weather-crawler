@@ -2,22 +2,21 @@ name: 每日兩次抓取氣象資料
 
 on:
   schedule:
-    - cron: '17 22 * * *'  # 台灣時間 06:17（UTC+8）
-    - cron: '17 10 * * *'  # 台灣時間 18:17（UTC+8）
+    - cron: '17 10,22 * * *'  # UTC 10:17、22:17，即台灣時間 18:17、翌日 06:17
   workflow_dispatch:
 
 jobs:
   run-weather-script:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
 
     steps:
     - name: 下載程式碼
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: 安裝 Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v7
       with:
         python-version: '3.12'
 
