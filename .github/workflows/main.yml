@@ -1,8 +1,8 @@
-name: 每日兩次抓取氣象資料
+name: 每日三次抓取氣象資料
 
 on:
   schedule:
-    - cron: '17 10,22 * * *'  # UTC 10:17、22:17，即台灣時間 18:17、翌日 06:17
+    - cron: '17 10,19,22 * * *'  # UTC 10:17、19:17、22:17，即台灣時間 18:17、翌日 03:17、06:17
   workflow_dispatch:
 
 jobs:
@@ -13,12 +13,13 @@ jobs:
 
     steps:
     - name: 下載程式碼
-      uses: actions/checkout@v7
+      uses: actions/checkout@v4
 
     - name: 安裝 Python
-      uses: actions/setup-python@v7
+      uses: actions/setup-python@v5
       with:
         python-version: '3.12'
+        cache: 'pip'
 
     - name: 安裝必要套件
       run: |

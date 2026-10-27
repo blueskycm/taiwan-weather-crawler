@@ -5,7 +5,7 @@
 ---
 ## 🧩 功能特色
 
-- ⏰ **每日兩次自動執行**：台灣時間 06:17、18:17（使用 GitHub Actions 定時排程，避開整點；實際啟動仍可能延遲）
+- ⏰ **每日三次自動執行**：台灣時間 03:17、06:17、18:17（使用 GitHub Actions 定時排程，避開整點；實際啟動仍可能延遲）
 - 🗺️ **涵蓋全台 22 縣市**：資料來源為中央氣象署官方網站
 - 💡 **擷取資訊包含**：
   - 日期
@@ -19,8 +19,9 @@
 ---
 ## 排程維護
 
-- 預設分支為 `main`，排程為 UTC `17 10,22 * * *`，即台灣時間每日 06:17、18:17。
+- 預設分支為 `main`，排程為 UTC `17 10,19,22 * * *`，即台灣時間每日 03:17、06:17、18:17。
 - 2026-10-27：重新寫入合併排程設定，Actions 升級至 `actions/checkout@v7`、`actions/setup-python@v7`（Node.js 24），固定 `ubuntu-24.04`，避免 `ubuntu-latest` 自動切換系統版本。
+- 2026-10-28：依需求改用 `actions/checkout@v4`、`actions/setup-python@v5`，啟用 pip 快取，新增台灣時間 03:17 排程；保留 06:17、18:17 與 `ubuntu-24.04`。
 - Actions 排程仍可能延遲；workflow 顯示啟用不代表已準時觸發，需在執行紀錄確認事件為 `schedule`。
 
 ---
@@ -36,7 +37,7 @@
 ```plaintext
 .
 ├── .github/workflows/
-│   └── main.yml           # GitHub Actions 設定（每日兩次執行）
+│   └── main.yml           # GitHub Actions 設定（每日三次執行）
 ├── main.py                # 主程式：抓取資料並寫入 Sheets
 ├── requirements.txt       # Python 相依套件清單
 └── README.md              # 專案說明文件
